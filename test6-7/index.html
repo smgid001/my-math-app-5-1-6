@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪 캠핑장 넓이 단위 탐험대</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col justify-center items-center">
+
+<div class="max-w-5xl w-full space-y-4 md:space-y-6">
+
+    <div class="bg-white rounded-2xl p-4 md:p-5 shadow-sm border-2 border-emerald-300 flex justify-between items-center">
+        <div>
+            <span class="bg-emerald-100 text-emerald-800 text-xs md:text-sm font-bold px-3 py-1 rounded-full">⛺ 수학 캠핑 미션</span>
+            <h1 class="text-lg md:text-2xl font-black text-emerald-950 mt-1">🗺️ 넓이 단위 탐험대 (m²·km²)</h1>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4 bg-emerald-50/80 p-2 md:p-3 rounded-2xl border border-emerald-200">
+            <div id="badge-1" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🥉</span>
+                <span class="text-xs font-bold text-emerald-800">탐험가</span>
+            </div>
+            <div id="badge-2" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🥈</span>
+                <span class="text-xs font-bold text-emerald-800">전문가</span>
+            </div>
+            <div id="badge-3" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🏆</span>
+                <span class="text-xs font-bold text-emerald-800">마스터</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-emerald-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-black rounded-lg text-xs md:text-sm">미션 1</span>
+                <span id="q1-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-amber-50/50 border-amber-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 180 100"><rect x="14" y="24" width="52" height="52" fill="#a7f3d0" stroke="#047857" stroke-width="3"/><text x="40" y="46" fill="#065f46" font-size="11" font-weight="900" text-anchor="middle">1 m</text><text x="40" y="62" fill="#065f46" font-size="11" font-weight="900" text-anchor="middle">= 100 cm</text><text x="126" y="44" fill="#047857" font-size="17" font-weight="900" text-anchor="middle">5 m²</text><text x="126" y="66" fill="#065f46" font-size="13" font-weight="900" text-anchor="middle">= ? cm²</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                캠핑장 안내판의 넓이는 <span class="text-emerald-700 font-black">5 m²</span>입니다. 이 넓이는 몇 cm²입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q1-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-emerald-300 focus:border-emerald-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">cm²</span>
+                    <button onclick="checkAnswer(1)" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q1-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: 1 m² = 100 × 100 = 10000 cm²예요!
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-amber-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-black rounded-lg text-xs md:text-sm">미션 2</span>
+                <span id="q2-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-amber-50/50 border-amber-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 180 100"><rect x="14" y="24" width="52" height="52" fill="#fde68a" stroke="#b45309" stroke-width="3"/><text x="40" y="46" fill="#78350f" font-size="11" font-weight="900" text-anchor="middle">1 km</text><text x="40" y="62" fill="#78350f" font-size="11" font-weight="900" text-anchor="middle">= 1000 m</text><text x="126" y="44" fill="#b45309" font-size="13" font-weight="900" text-anchor="middle">2000000 m²</text><text x="126" y="66" fill="#78350f" font-size="13" font-weight="900" text-anchor="middle">= ? km²</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                캠핑장이 있는 숲의 넓이는 <span class="text-amber-700 font-black">2000000 m²</span>입니다. 이 넓이는 몇 km²입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q2-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-amber-300 focus:border-amber-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">km²</span>
+                    <button onclick="checkAnswer(2)" class="shrink-0 bg-amber-600 hover:bg-amber-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q2-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: 1 km² = 1000 × 1000 = 1000000 m²예요!
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-indigo-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 font-black rounded-lg text-xs md:text-sm">미션 3</span>
+                <span id="q3-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-indigo-50/50 border-indigo-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 180 110"><rect x="46" y="38" width="96" height="44" fill="#c7d2fe" stroke="#4338ca" stroke-width="3"/><text x="94" y="64" fill="#312e81" font-size="11" font-weight="900" text-anchor="middle">캠핑장 부지</text><path d="M46,34 Q70,19 72,24" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M116,24 Q118,19 142,34" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><text x="94" y="28" fill="#4338ca" font-size="11" font-weight="900" text-anchor="middle">7000 m</text><path d="M42,38 Q28,49 32,51" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M32,69 Q28,71 42,82" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><text x="31" y="64" fill="#4338ca" font-size="11" font-weight="900" text-anchor="middle">5 km</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                가로가 <span class="text-indigo-700 font-black">7000 m</span>, 세로가 <span class="text-indigo-700 font-black">5 km</span>인 직사각형 모양 부지의 넓이는 몇 km²입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q3-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-indigo-300 focus:border-indigo-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">km²</span>
+                    <button onclick="checkAnswer(3)" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q3-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: 두 변의 단위를 먼저 km로 똑같이 맞춘 다음 곱해 보세요!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="completion-message" class="bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-extrabold text-xs md:text-sm shadow-sm transition-all">
+        🏕️ 모든 미션을 완료하고 최고의 캠핑 마스터 배지를 획득해 보세요!
+    </div>
+
+</div>
+
+<script>
+    const answers = { 1: 50000, 2: 2, 3: 35 };
+    const solved = { 1: false, 2: false, 3: false };
+
+    function checkAnswer(qNum) {
+        const input = document.getElementById(`q${qNum}-input`);
+        const hint = document.getElementById(`q${qNum}-hint`);
+        const status = document.getElementById(`q${qNum}-status`);
+        const userAns = parseInt(input.value);
+
+        if (isNaN(userAns)) {
+            alert('숫자로 답을 입력해주세요!');
+            return;
+        }
+
+        if (userAns === answers[qNum]) {
+            solved[qNum] = true;
+            hint.classList.add('hidden');
+            status.innerHTML = '⭕ 정답';
+            status.className = 'text-xs md:text-sm font-black text-emerald-600';
+            input.disabled = true;
+            input.classList.add('bg-emerald-50', 'text-emerald-700');
+        } else {
+            solved[qNum] = false;
+            hint.classList.remove('hidden');
+            status.innerHTML = '❌ 다시 도전';
+            status.className = 'text-xs md:text-sm font-black text-rose-500';
+        }
+
+        updateBadges();
+    }
+
+    function updateBadges() {
+        const correctCount = Object.values(solved).filter(Boolean).length;
+        const on = 'flex flex-col items-center opacity-100 scale-110 transition-all';
+        const off = 'flex flex-col items-center opacity-30 transition-all';
+        document.getElementById('badge-1').className = correctCount >= 1 ? on : off;
+        document.getElementById('badge-2').className = correctCount >= 2 ? on : off;
+        document.getElementById('badge-3').className = correctCount >= 3 ? on : off;
+
+        const msg = document.getElementById('completion-message');
+        if (correctCount === 3) {
+            msg.className = "bg-amber-500 text-white text-center py-3 px-4 rounded-xl font-black text-xs md:text-sm shadow-md animate-bounce";
+            msg.innerHTML = "🎉 축하합니다! 모든 미션을 해결하여 '🏆 캠핑 마스터 배지'를 획득했습니다!";
+        } else if (correctCount > 0) {
+            msg.innerHTML = `🔥 멋져요! 총 ${correctCount}개의 배지를 획득했습니다. 남은 미션도 완료해 보세요!`;
+        }
+    }
+</script>
+
+</body>
+</html>

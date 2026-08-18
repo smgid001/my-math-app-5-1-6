@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪 캠핑장 직사각형 넓이 탐험대</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col justify-center items-center">
+
+<div class="max-w-5xl w-full space-y-4 md:space-y-6">
+
+    <div class="bg-white rounded-2xl p-4 md:p-5 shadow-sm border-2 border-emerald-300 flex justify-between items-center">
+        <div>
+            <span class="bg-emerald-100 text-emerald-800 text-xs md:text-sm font-bold px-3 py-1 rounded-full">⛺ 수학 캠핑 미션</span>
+            <h1 class="text-lg md:text-2xl font-black text-emerald-950 mt-1">🛏️ 직사각형 넓이 탐험대</h1>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4 bg-emerald-50/80 p-2 md:p-3 rounded-2xl border border-emerald-200">
+            <div id="badge-1" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🥉</span>
+                <span class="text-xs font-bold text-emerald-800">탐험가</span>
+            </div>
+            <div id="badge-2" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🥈</span>
+                <span class="text-xs font-bold text-emerald-800">전문가</span>
+            </div>
+            <div id="badge-3" class="flex flex-col items-center opacity-30 transition-all">
+                <span class="text-2xl md:text-3xl">🏆</span>
+                <span class="text-xs font-bold text-emerald-800">마스터</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-emerald-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-black rounded-lg text-xs md:text-sm">미션 1</span>
+                <span id="q1-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-amber-50/50 border-amber-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 170 120"><rect x="26" y="48" width="100" height="36" fill="#a7f3d0" stroke="#047857" stroke-width="3"/><text x="76" y="70" fill="#065f46" font-size="12" font-weight="900" text-anchor="middle">캠핑 매트</text><path d="M26,44 Q51,29 57,34" fill="none" stroke="#047857" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M95,34 Q101,29 126,44" fill="none" stroke="#047857" stroke-width="1.8" stroke-dasharray="4,3"/><text x="76" y="38" fill="#047857" font-size="11" font-weight="900" text-anchor="middle">21 cm</text><path d="M130,48 Q144,57 140,57" fill="none" stroke="#047857" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M140,75 Q144,75 130,84" fill="none" stroke="#047857" stroke-width="1.8" stroke-dasharray="4,3"/><text x="141" y="70" fill="#047857" font-size="11" font-weight="900" text-anchor="middle">5 cm</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                가로가 <span class="text-emerald-700 font-black">21 cm</span>, 세로가 <span class="text-emerald-700 font-black">5 cm</span>인 <strong class="text-emerald-800">직사각형</strong> 모양 매트의 넓이는 몇 cm²입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q1-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-emerald-300 focus:border-emerald-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">cm²</span>
+                    <button onclick="checkAnswer(1)" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q1-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: 1 cm²가 가로 한 줄에 몇 개씩, 몇 줄 들어가는지 생각해 보세요!
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-amber-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-black rounded-lg text-xs md:text-sm">미션 2</span>
+                <span id="q2-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-amber-50/50 border-amber-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 170 120"><rect x="30" y="42" width="90" height="50" fill="#fde68a" stroke="#b45309" stroke-width="3"/><text x="75" y="62" fill="#78350f" font-size="11" font-weight="900" text-anchor="middle">나무 도마</text><text x="75" y="78" fill="#b45309" font-size="11" font-weight="900" text-anchor="middle">400 cm²</text><path d="M30,38 Q52,23 67,28" fill="none" stroke="#b45309" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M83,28 Q98,23 120,38" fill="none" stroke="#b45309" stroke-width="1.8" stroke-dasharray="4,3"/><text x="75" y="32" fill="#b45309" font-size="15" font-weight="900" text-anchor="middle">?</text><path d="M124,42 Q138,54 134,58" fill="none" stroke="#b45309" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M134,76 Q138,80 124,92" fill="none" stroke="#b45309" stroke-width="1.8" stroke-dasharray="4,3"/><text x="135" y="71" fill="#b45309" font-size="11" font-weight="900" text-anchor="middle">16 cm</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                넓이가 <span class="text-amber-700 font-black">400 cm²</span>인 직사각형 모양 도마의 세로가 16 cm입니다. 가로는 몇 cm입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q2-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-amber-300 focus:border-amber-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">cm</span>
+                    <button onclick="checkAnswer(2)" class="shrink-0 bg-amber-600 hover:bg-amber-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q2-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: (가로)×(세로)=(넓이)예요. 넓이를 세로로 나누어 보세요!
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-2 border-indigo-200 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 font-black rounded-lg text-xs md:text-sm">미션 3</span>
+                <span id="q3-status" class="text-xs md:text-sm font-bold text-slate-400">도전 중</span>
+            </div>
+            <div class="bg-indigo-50/50 border-indigo-200 p-3 rounded-xl border flex flex-col items-center justify-center">
+                <svg class="w-full h-32 md:h-36 drop-shadow-sm" viewBox="0 0 170 122"><rect x="34" y="30" width="70" height="62" fill="#c7d2fe" stroke="#4338ca" stroke-width="3"/><text x="69" y="56" fill="#312e81" font-size="11" font-weight="900" text-anchor="middle">방수 깔개</text><text x="69" y="72" fill="#4338ca" font-size="11" font-weight="900" text-anchor="middle">넓이 ?</text><path d="M108,30 Q122,46 118,52" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><path d="M118,70 Q122,76 108,92" fill="none" stroke="#4338ca" stroke-width="1.8" stroke-dasharray="4,3"/><text x="119" y="65" fill="#4338ca" font-size="11" font-weight="900" text-anchor="middle">22 cm</text><text x="69" y="112" fill="#312e81" font-size="12" font-weight="900" text-anchor="middle">둘레 70 cm</text></svg>
+            </div>
+            <p class="text-sm md:text-base font-bold text-slate-700 leading-relaxed min-h-[3.5rem]">
+                둘레가 <span class="text-indigo-700 font-black">70 cm</span>이고 세로가 <span class="text-indigo-700 font-black">22 cm</span>인 직사각형 깔개가 있습니다. 이 깔개의 넓이는 몇 cm²입니까?
+            </p>
+            <div class="space-y-2 mt-auto">
+                <div class="flex items-center gap-1.5">
+                    <input type="number" id="q3-input" placeholder="답 입력" class="w-full p-2.5 border-2 border-indigo-300 focus:border-indigo-500 rounded-xl text-center font-bold text-sm focus:outline-none">
+                    <span class="text-sm font-bold text-slate-600">cm²</span>
+                    <button onclick="checkAnswer(3)" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3.5 py-2.5 rounded-xl text-sm transition">확인</button>
+                </div>
+                <div id="q3-hint" class="hidden p-2 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-bold leading-tight">
+                    💡 힌트: 둘레÷2 = (가로+세로)! 가로를 먼저 구한 뒤 넓이를 구해 보세요.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="completion-message" class="bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-extrabold text-xs md:text-sm shadow-sm transition-all">
+        🏕️ 모든 미션을 완료하고 최고의 캠핑 마스터 배지를 획득해 보세요!
+    </div>
+
+</div>
+
+<script>
+    const answers = { 1: 105, 2: 25, 3: 286 };
+    const solved = { 1: false, 2: false, 3: false };
+
+    function checkAnswer(qNum) {
+        const input = document.getElementById(`q${qNum}-input`);
+        const hint = document.getElementById(`q${qNum}-hint`);
+        const status = document.getElementById(`q${qNum}-status`);
+        const userAns = parseInt(input.value);
+
+        if (isNaN(userAns)) {
+            alert('숫자로 답을 입력해주세요!');
+            return;
+        }
+
+        if (userAns === answers[qNum]) {
+            solved[qNum] = true;
+            hint.classList.add('hidden');
+            status.innerHTML = '⭕ 정답';
+            status.className = 'text-xs md:text-sm font-black text-emerald-600';
+            input.disabled = true;
+            input.classList.add('bg-emerald-50', 'text-emerald-700');
+        } else {
+            solved[qNum] = false;
+            hint.classList.remove('hidden');
+            status.innerHTML = '❌ 다시 도전';
+            status.className = 'text-xs md:text-sm font-black text-rose-500';
+        }
+
+        updateBadges();
+    }
+
+    function updateBadges() {
+        const correctCount = Object.values(solved).filter(Boolean).length;
+        const on = 'flex flex-col items-center opacity-100 scale-110 transition-all';
+        const off = 'flex flex-col items-center opacity-30 transition-all';
+        document.getElementById('badge-1').className = correctCount >= 1 ? on : off;
+        document.getElementById('badge-2').className = correctCount >= 2 ? on : off;
+        document.getElementById('badge-3').className = correctCount >= 3 ? on : off;
+
+        const msg = document.getElementById('completion-message');
+        if (correctCount === 3) {
+            msg.className = "bg-amber-500 text-white text-center py-3 px-4 rounded-xl font-black text-xs md:text-sm shadow-md animate-bounce";
+            msg.innerHTML = "🎉 축하합니다! 모든 미션을 해결하여 '🏆 캠핑 마스터 배지'를 획득했습니다!";
+        } else if (correctCount > 0) {
+            msg.innerHTML = `🔥 멋져요! 총 ${correctCount}개의 배지를 획득했습니다. 남은 미션도 완료해 보세요!`;
+        }
+    }
+</script>
+
+</body>
+</html>
